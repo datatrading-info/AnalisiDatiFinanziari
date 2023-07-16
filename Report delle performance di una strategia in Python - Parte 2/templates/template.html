@@ -1,0 +1,45 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>App</title>
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <!-- Our Custom CSS -->
+    <link rel="stylesheet" href="static/app.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Plotly JS -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <!-- Our Custom JS -->
+    <script charset="utf-8" src="static/app.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Trading Backtest Report</h1>
+    <hr>
+        <div class="row">
+            <div class="col-sm-8">{{ perf_chart|safe }}</div>
+            <div class="col-sm-4"><br><br>
+                <h5>KPI Table</h5>
+                {{ kpi_table|safe }}</div>
+        </div>
+    <hr>
+        <div class="row">
+            <h5>Monthly Returns</h5>
+            <div class="col-sm-12">{{ monthly_table|safe }}</div>
+        </div>
+    <hr>
+        <div class="row">
+            <div class="col-sm-12">{{ drawdown_chart|safe }}</div>
+        </div>
+    </div>
+</body>
+</html>
+
+
+
+
+
+
+
