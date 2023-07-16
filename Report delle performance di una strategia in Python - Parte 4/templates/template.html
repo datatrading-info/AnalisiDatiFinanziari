@@ -1,0 +1,164 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>App</title>
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <!-- Our Custom CSS -->
+    <link rel="stylesheet" href="static/app.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Plotly JS -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <!-- Our Custom JS -->
+    <script charset="utf-8" src="static/app.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <h1>Trading Backtest Report</h1>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-sm-8">{{ perf_chart|safe }}</div>
+            <div class="col-sm-4"><br><br>
+                <h5>KPI Table</h5>
+                {{ kpi_table|safe }}</div>
+        </div>
+        <hr>
+        <div class="row"><h5>Monthly Returns</h5></div>
+        <div class="row">
+            <div class="col-sm-12">
+                                  {{ monthly_table|safe }}
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-sm-12">{{ drawdown_chart|safe }}</div>
+        </div>
+        <hr>
+        <div class="row"><h5>KPI Tables</h5></div>
+        <div class="row">
+
+            <div class="col-sm-6">
+                                  {{ kpi_table_1|safe }}<br>
+                                  {{ kpi_table_5|safe }}
+            </div>
+            <div class="col-sm-6">{{ kpi_table_2|safe }}<br>
+                                  {{ kpi_table_3|safe }}<br>
+                                  {{ kpi_table_4|safe }}<br>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-sm-12">{{ daily_ret_hist|safe }}</div>
+        </div>
+        <hr>
+        <div class="row">
+                <div class="col-sm-12">{{ daily_ret_box|safe }}</div>
+        </div>
+        <hr>
+        <div class="row">
+                <div class="col-sm-12">{{ mc_chart|safe }}</div>
+        </div>
+        <hr>
+        <div class="row">
+                <div class="col-sm-6">{{ mc_dist_chart|safe }}</div>
+                <div class="col-sm-6">{{ mc_hist_chart|safe }}</div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-sm-6"><h5>Best MC Run KPI Table</h5>{{ best_df_kpi|safe }}</div>
+            <div class="col-sm-6"><h5>Worst MC Run KPI Table</h5>{{ worst_df_kpi|safe }}</div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-sm-6">
+                <b><center>Monte Carlo (Sampled) Confidence Levels</center></b>
+                <table data-toggle="table" class="table table-hover table-bordered table-striped">
+                    <colgroup>
+                        <col style="width:33%">
+                        <col style="width:33%">
+                        <col style="width:33%">
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th>KPI</th>
+                            <th data-cell-style="cellStyle">Annual Return(%)</th>
+                            <th data-cell-style="cellStyle">Maximum  Drawdown (%)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><b>1%<b></b></b></td>
+                            <td>{{mc_dict_perf.mc_99perc}}</td>
+                            <td>{{mc_dict_dd.mc_99perc_dd}}</td>
+                        </tr>
+                        <tr>
+                            <td><b>5%<b></b></b></td>
+                            <td>{{mc_dict_perf.mc_95perc}}</td>
+                            <td>{{mc_dict_dd.mc_95perc_dd}}</td>
+                        </tr>
+                        <tr>
+                            <td><b>10%<b></b></b></td>
+                            <td>{{mc_dict_perf.mc_90perc}}</td>
+                            <td>{{mc_dict_dd.mc_90perc_dd}}</td>
+                        </tr>
+                        <tr>
+                            <td><b>20%<b></b></b></td>
+                            <td>{{mc_dict_perf.mc_80perc}}</td>
+                            <td>{{mc_dict_dd.mc_80perc_dd}}</td>
+                        </tr>
+                        <tr>
+                            <td><b>30%<b></b></b></td>
+                            <td>{{mc_dict_perf.mc_70perc}}</td>
+                            <td>{{mc_dict_dd.mc_70perc_dd}}</td>
+                        </tr>
+                        <tr>
+                            <td><b>40%</b></td>
+                            <td>{{mc_dict_perf.mc_60perc}}</td>
+                            <td>{{mc_dict_dd.mc_60perc_dd}}</td>
+                        </tr>
+                        <tr>
+                            <td><b>50%</b></td>
+                            <td>{{mc_dict_perf.mc_50perc}}</td>
+                            <td>{{mc_dict_dd.mc_50perc_dd}}</td>
+                        </tr>
+                        <tr>
+                            <td><b>60%</b></td>
+                            <td>{{mc_dict_perf.mc_40perc}}</td>
+                            <td>{{mc_dict_dd.mc_40perc_dd}}</td>
+                        </tr>
+                        <tr>
+                            <td><b>70%</b></td>
+                            <td>{{mc_dict_perf.mc_30perc}}</td>
+                            <td>{{mc_dict_dd.mc_30perc_dd}}</td>
+                        </tr>
+                        <tr>
+                            <td><b>80%</b></td>
+                            <td>{{mc_dict_perf.mc_20perc}}</td>
+                            <td>{{mc_dict_dd.mc_20perc_dd}}</td>
+                        </tr>
+                        <tr>
+                            <td><b>90%</b></td>
+                            <td>{{mc_dict_perf.mc_10perc}}</td>
+                            <td>{{mc_dict_dd.mc_10perc_dd}}</td>
+                        </tr>
+                        <tr>
+                            <td><b>95%</b></td>
+                            <td>{{mc_dict_perf.mc_5perc}}</td>
+                            <td>{{mc_dict_dd.mc_5perc_dd}}</td>
+                        </tr>
+                        <tr>
+                            <td><b>99%</b></td>
+                            <td>{{mc_dict_perf.mc_1perc}}</td>
+                            <td>{{mc_dict_dd.mc_1perc_dd}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
